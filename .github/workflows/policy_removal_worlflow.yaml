@@ -1,0 +1,38 @@
+name: automation-to-remove-policy-from-azure
+on:
+  workflow_dispatch:
+    inputs:
+      subscription_name:
+        description: 'Azure subscription name'
+        required: true
+        type: string
+        default: 'TECH-CLOUDCOE-NONPROD'
+      policy_name:
+        description: 'Azure policy name - the policy to be removed from above subscription'
+        default: 'tagging policy'
+        type: string
+        required: true
+jobs:
+  automation-to-remove-policy-from-azure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v4
+      - name: set up python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: package installations
+        run: |
+          pip install pipenv
+          pipenv install
+      - name: execute python program
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: |
+          pipenv run python3 remove_azure_policy.py --subscription_name ${{ inputs.subscription_name }} --policy_name ${{ inputs.policy_name }}
+      - name: Completed
+        run: |
+          echo "program completed successfully"
