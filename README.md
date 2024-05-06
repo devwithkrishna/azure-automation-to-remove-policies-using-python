@@ -4,7 +4,6 @@ automation to remove policy from a subscription by name - especially tagging pol
 # References
 * https://learn.microsoft.com/en-us/python/api/azure-core/azure.core.exceptions.httpresponseerror?view=azure-python#azure-core-exceptions-httpresponseerror-message :heavy_check_mark:
 * https://learn.microsoft.com/en-us/python/api/azure-mgmt-resource/azure.mgmt.resource.policy.v2022_06_01.operations.policyassignmentsoperations?view=azure-python#azure-mgmt-resource-policy-v2022-06-01-operations-policyassignmentsoperations-delete :heavy_check_mark:
-* https://learn.microsoft.com/en-us/python/api/azure-mgmt-policyinsights/azure.mgmt.policyinsights.operations.operations?view=azure-python :heavy_check_mark:
 * https://learn.microsoft.com/en-us/python/api/azure-mgmt-resource/azure.mgmt.resource.policy.v2022_06_01.policyclient?view=azure-python :heavy_check_mark: 
 
 # What is azure policy

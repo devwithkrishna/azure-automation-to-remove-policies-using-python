@@ -3,7 +3,6 @@ import os
 import json
 from dotenv import load_dotenv
 from azure.identity import DefaultAzureCredential
-from azure.mgmt.policyinsights import PolicyInsightsClient
 from azure.core.exceptions import HttpResponseError
 from azure.mgmt.resource import PolicyClient
 from typing import List, Dict, Any
@@ -17,33 +16,34 @@ def list_azure_policy_in_a_subscription_scope(subscription_id:str):
     """
     try:
         credential = DefaultAzureCredential()
-        policy_insights_client = PolicyInsightsClient(credential, subscription_id={subscription_id})
-        policy_assignments = policy_insights_client.policy_states.list_query_results_for_subscription(policy_states_resource='latest',subscription_id=subscription_id)
+        # policy_insights_client = PolicyInsightsClient(credential, subscription_id=subscription_id)
+        policy_client = PolicyClient(credential=credential,subscription_id=subscription_id)
+        policy_assignments = policy_client.policy_assignments.list()
         policy_assignments_list = []
+        i=0
         for assignment in policy_assignments:
-            print(f"Policy Assignment ID: {assignment.policy_assignment_id}")
-            print(f"Policy Assignment Name: {assignment.policy_assignment_name}")
-            print(f"Policy Assignment Scope: {assignment.policy_assignment_scope}")
+            print(f'Policy no #{i}')
+            print(f"Policy Assignment ID: {assignment.id}")
+            print(f"Policy Assignment Name: {assignment.display_name}")
+            print(f"Policy Assignment Scope: {assignment.scope}")
             print(f"Policy Definition ID: {assignment.policy_definition_id}")
-            print(f"Policy Definition Name: {assignment.policy_definition_name}")
-            print(f"Policy Assignment Created On: {assignment.timestamp.strftime('%Y-%m-%d %H:%M:%S')}")
-            print("------------------------------")
+            print(f"Policy Assignment Created On: {assignment.metadata['createdOn']}")
+            print("++++++++++++++++++++++++++++++++++")
             assignment_dict = {
-                "policy_assignment_id": assignment.policy_assignment_id,
-                "policy_assignment_name": assignment.policy_assignment_name,
-                "policy_assignment_scope": assignment.policy_assignment_scope,
+                "policy_assignment_id": assignment.id,
+                "policy_assignment_name": assignment.display_name,
+                "policy_assignment_scope": assignment.scope,
                 "policy_definition_id": assignment.policy_definition_id,
-                "policy_definition_name": assignment.policy_definition_name,
-                "policy_assignment_created_on": assignment.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+                "policy_assignment_created_on": assignment.metadata['createdOn']
             }
+            i=i+1
             policy_assignments_list.append(assignment_dict)
-            file_name = f'azure_policy_assignment_{subscription_id}.json'
-            print(file_name)
-            # Assuming policy_assignments_list is the list of dictionaries
-            with open(file_name, 'w') as json_file:
-                json.dump(policy_assignments_list, json_file, indent=4)
-            print(f"Policy assignments successfully retrieved and saved to {file_name} .")
-
+        file_name = f'azure_policy_assignment_{subscription_id}.json'
+        print(file_name)
+        # Assuming policy_assignments_list is the list of dictionaries
+        with open(file_name, 'w') as json_file:
+            json.dump(policy_assignments_list, json_file, indent=4)
+        print(f"Policy assignments successfully retrieved and saved to {file_name} .")
         return policy_assignments_list
     except HttpResponseError as ex:
         print(f"Failed to retrieve policy assignments. Error message: {ex.message}")
@@ -94,7 +94,9 @@ def main():
     print(f'Subscription id of {subscription_name} is : {subscription_id}')
     os.environ['subscription_id'] = subscription_id
     policy_assignments_list = list_azure_policy_in_a_subscription_scope(subscription_id=subscription_id)
+    print(f'Total number of policies assigned on {subscription_name} : {len(policy_assignments_list)}')
     policy_name, policy_assignment_scope = validation_of_policy_name(policy_name=policy_name, policy_assignments_list=policy_assignments_list)
+    print(f'Policy name and policy assignment scope are : {policy_name} & {policy_assignment_scope}')
     if policy_name is not None:
         print(f'Removing policy {policy_name} on the scope {policy_assignment_scope}')
         remove_azure_policy_from_subscription(credential=credential,subscription_id=subscription_id, policy_name=policy_name, scope=policy_assignment_scope)
