@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f6a22197f2f0b0b3360559acd693aab9a35af4d0dd4f9d3195d60edbc5ac9ff7"
+            "sha256": "b00fb3713889cc03b251b4786782108975bc86ebc4c555807f9bee79922b2d93"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -67,12 +67,12 @@
         },
         "azure-mgmt-resource": {
             "hashes": [
-                "sha256:12726627037de3623d3c4a140a08d9eb97502e33ef4680243f310d5004df5e96",
-                "sha256:fecc3fe1685dd6a27a56e033becccc798464af5be25f55138539cef49d876028"
+                "sha256:20b6b006b544fdb19607f3f6a381105625e0bb60fbf3036f39885c4646d3343e",
+                "sha256:fcaa4eca357d216f285b04e20b7f7bfaefda738ba6d30d956193090d3e325248"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==23.1.0"
+            "version": "==23.1.1"
         },
         "azure-mgmt-resourcegraph": {
             "hashes": [
