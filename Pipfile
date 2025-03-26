@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 argparse = "=1.4.0"
-pytz = "=2025.1"
+pytz = "=2025.2"
 python-dotenv = "=1.0.1"
 azure-mgmt-policyinsights = "=1.0.0"
 azure-identity = "=1.20.0"
