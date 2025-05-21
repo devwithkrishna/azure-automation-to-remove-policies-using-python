@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4efa514100bae543925f720326dd8c55f46fb26fd4af9f96b8b8ccc66bc4ca33"
+            "sha256": "58b96295f69c063066816ba6d045571b3505a5f85f95b27da72d0a470887350a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -51,11 +51,11 @@
         },
         "azure-mgmt-core": {
             "hashes": [
-                "sha256:81071675f186a585555ef01816f2774d49c1c9024cb76e5720c3c0f6b337bb7d",
-                "sha256:d195208340094f98e5a6661b781cde6f6a051e79ce317caabd8ff97030a9b3ae"
+                "sha256:18aaa5a723ee8ae05bf1bfc9f6d0ffb996631c7ea3c922cc86f522973ce07b5f",
+                "sha256:380ae3dfa3639f4a5c246a7db7ed2d08374e88230fd0da3eb899f7c11e5c441a"
             ],
-            "markers": "python_version >= '3.7'",
-            "version": "==1.4.0"
+            "markers": "python_version >= '3.8'",
+            "version": "==1.5.0"
         },
         "azure-mgmt-policyinsights": {
             "hashes": [
@@ -67,12 +67,12 @@
         },
         "azure-mgmt-resource": {
             "hashes": [
-                "sha256:747b750df7af23ab30e53d3f36247ab0c16de1e267d666b1a5077c39a4292529",
-                "sha256:7af2bca928ecd58e57ea7f7731d245f45e9d927036d82f1d30b96baa0c26b569"
+                "sha256:17282d20dc643fb68a286c2c350a191dc3bf386827f65a7daeeb714367a19316",
+                "sha256:7cc0909184bd01439e245f5f2e20945a3668d45a6774e1f008227bb33a733d16"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==23.2.0"
+            "markers": "python_version >= '3.9'",
+            "version": "==23.4.0"
         },
         "azure-mgmt-resourcegraph": {
             "hashes": [
